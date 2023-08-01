@@ -41,11 +41,18 @@ public class Seminar1 {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
+
         /*
           Использование исключений позволяет выделить и обработать ошибки в одном месте,
           а не вносить коды ошибок в результаты методов
           и делать проверку на каждый возможный код ошибки в вызывающем коде.
          */
+        try {
+            Integer[] arr = {1, null, 3, null, 5};
+            checkArray(arr);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -115,6 +122,23 @@ public class Seminar1 {
         }
 
         return sum;
+    }
+
+    /**
+     * Проверка на неравенство null
+     * @param arr целочисленный одномерный массив
+     */
+    public static void checkArray(Integer[] arr) {
+        StringBuilder isNull = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                isNull.append(i).append(" ");
+                System.out.println("Ошибка: в массиве найден null в ячейке \u001B[31m#" + i + "\u001B[0m");
+            }
+        }
+        if (isNull.length() > 1) {
+            throw new RuntimeException("Ошибка: встречается значение null:" + isNull);
+        }
     }
 
 }
