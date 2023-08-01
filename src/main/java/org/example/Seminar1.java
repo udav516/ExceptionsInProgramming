@@ -29,6 +29,19 @@ public class Seminar1 {
         } else {
             System.out.println("Искомый элемент найден в массиве под индексом " + index);
         }
+
+        int[][] matrix1 = {{1, 0, 1}, {0, 1, 0}, {1, 0, 1}};
+        int sum1 = calculateSum(matrix1);
+        System.out.println("Сумма элементов: " + sum1);
+
+        int[][] matrix2 = {{1, 0, 2}, {0, 1, 0}, {1, 0, 1}};
+        try {
+            int sum2 = calculateSum(matrix2);
+            System.out.println("Сумма элементов: " + sum2);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -68,4 +81,36 @@ public class Seminar1 {
 
         return -2;
     }
+
+    /**
+     * Сумма элементов массива
+     * @param matrix целочисленный двумерный массив
+     * @return сумма элементов
+     */
+    public static int calculateSum(int[][] matrix) {
+        if (matrix == null) {
+            throw new RuntimeException("Ошибка: передан null");
+        }
+
+        int n = matrix.length;
+        int m = matrix[0].length;
+
+        if (n != m) {
+            throw new RuntimeException("Ошибка: массив не является квадратным");
+        }
+
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] != 0 && matrix[i][j] != 1) {
+                    throw new RuntimeException("Ошибка: значение в ячейке не равно 0 или 1");
+                }
+                sum += matrix[i][j];
+            }
+        }
+
+        return sum;
+    }
+
 }
