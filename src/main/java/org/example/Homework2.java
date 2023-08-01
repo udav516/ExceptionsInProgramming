@@ -69,6 +69,15 @@ public class Homework2 {
             System.out.println("Что-то пошло не так...");
         }
 //    }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите строку: ");
+        String inputString = scanner.nextLine();
+        if (inputString.isEmpty()) {
+            throw new IllegalArgumentException("Пустые строки вводить нельзя!");
+        }
+        System.out.println("Введенная строка: " + input);
+        scanner.close();
     }
 
     /**
