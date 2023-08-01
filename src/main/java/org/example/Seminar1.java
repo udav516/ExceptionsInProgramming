@@ -53,6 +53,18 @@ public class Seminar1 {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
+
+        int[] arrayOne = {1, 2, 3};
+        int[] arrayTwo = {4, 5, 6};
+
+        try {
+            int[] result = sumArrays(arrayOne, arrayTwo);
+            for (int i = 0; i < result.length; i++) {
+                System.out.println("Сумма элементов на позиции " + i + ": " + result[i]);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -137,8 +149,27 @@ public class Seminar1 {
             }
         }
         if (isNull.length() > 1) {
-            throw new RuntimeException("Ошибка: встречается значение null:" + isNull);
+            throw new RuntimeException("Ошибка: встречается значение null: " + isNull);
         }
     }
 
+    /**
+     *Сумма масивов с проверкой на неравенство длины массивов
+     * @param array1 целочисленный массив
+     * @param array2 целочисленный массив
+     * @return сумма массивов по индексам
+     */
+    public static int[] sumArrays(int[] array1, int[] array2) {
+        if (array1.length != array2.length) {
+            throw new IllegalArgumentException("Ошибка: длины массивов не равны");
+        }
+
+        int[] result = new int[array1.length];
+
+        for (int i = 0; i < array1.length; i++) {
+            result[i] = array1[i] + array2[i];
+        }
+
+        return result;
+    }
 }
