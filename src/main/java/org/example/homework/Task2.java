@@ -14,7 +14,6 @@ public class Task2 {
          * Исправить код
          */
         try {
-//            int d = 0;
             int d = 3;
             int[] intArray = {1, 2, 3, 4, 5, 6, 7, 8, 9};
             double catchRes1 = (double) intArray[8] / d;
