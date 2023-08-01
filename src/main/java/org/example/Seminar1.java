@@ -65,6 +65,13 @@ public class Seminar1 {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+
+        int[][] arrayFirst = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        checkLength(arrayFirst);
     }
 
     /**
@@ -171,5 +178,31 @@ public class Seminar1 {
         }
 
         return result;
+    }
+
+    /**
+     * Проверка на равенство длины строк и столбцов в двумерном массиве
+     * @param array двумерный массив
+     */
+    public static void checkLength(int[][] array) {
+        List<String> mismatchedIndices = new ArrayList<>();
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i].length != array[j].length) {
+                    mismatchedIndices.add("(" + i + ", " + j + ")");
+                }
+            }
+        }
+
+        if (mismatchedIndices.isEmpty()) {
+            System.out.println("Длины строк и столбцов с одинаковым индексом одинаковы.");
+        } else {
+            System.out.println("Длины строк и столбцов с одинаковым индексом не одинаковы:");
+
+            for (String indices : mismatchedIndices) {
+                System.out.println(indices);
+            }
+        }
     }
 }
