@@ -57,8 +57,10 @@ public class Seminar3 {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            ;
         }
+
+        String[][] matrix = {{"1", "2", "3", "4"}, {"1", "2", "3", "4"}, {"1", "2", "3", "4"}, {"1", "2", "3", "4"}};
+        System.out.println(getIntSumOfArray(matrix));
     }
 
     public static void doSomething() throws Exception {
@@ -78,6 +80,30 @@ public class Seminar3 {
         }
     }
 
+    public static int getIntSumOfArray(String[][] matrix) {
+        if (matrix.length != 4 || matrix[0].length != 4) {
+            throw new myArraySizeException(matrix.length, matrix[0].length);
+        }
+        int sum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (!checkParse(matrix[i][j])) {
+                    throw new myArrayDataException(i, j, matrix[i][j]);
+                }
+                sum += Integer.parseInt(matrix[i][j]);
+            }
+        }
+        return sum;
+    }
+
+    public static boolean checkParse(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
 
 class Counter implements AutoCloseable {
@@ -127,3 +153,15 @@ class myFileNotFoundExeption extends FileNotFoundException {
     }
 }
 
+class myArraySizeException extends RuntimeException {
+    public myArraySizeException(int row, int column) {
+        super("Массив не имеет размер 4х4, его параметры: " + row + " " + column);
+    }
+}
+
+
+class myArrayDataException extends RuntimeException {
+    public myArrayDataException(int row, int column, String value) {
+        super("Элемент массива [" + row + "][" + column + "] = " + value);
+    }
+}
