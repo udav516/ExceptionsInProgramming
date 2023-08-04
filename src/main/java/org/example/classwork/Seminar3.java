@@ -10,6 +10,7 @@ public class Seminar3 {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         try (Counter counter = new Counter()) {
             counter.add();
             System.out.println(counter.getA());
@@ -17,6 +18,46 @@ public class Seminar3 {
             counter.add();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+
+        int n = 7;
+        String[] array = {"hello", "goodbye", null, "ok", "error"};
+        String file = "dataFile";
+
+        try {
+            int b = n / 0;
+            System.out.println(b);
+        } catch (ArithmeticException e) {
+            try {
+                throw new DivisionByZeroException();
+            } catch (DivisionByZeroException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        int i = 0;
+        try {
+            for (; i < array.length; i++) {
+                System.out.println(array[i].length());
+            }
+        } catch (NullPointerException e) {
+            try {
+                throw new myNullPointerExeption(i);
+            } catch (myNullPointerExeption ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+        try (FileReader fr = new FileReader(file)) {
+            fr.read();
+        } catch (FileNotFoundException e) {
+            try {
+                throw new myFileNotFoundExeption(file);
+            } catch (myFileNotFoundExeption ex) {
+                System.out.println(ex.getMessage());
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            ;
         }
     }
 
@@ -65,6 +106,24 @@ class Counter implements AutoCloseable {
     public void close() {
         this.a = -1;
         System.out.println("Method close is closed");
+    }
+}
+
+class DivisionByZeroException extends ArithmeticException {
+    public DivisionByZeroException() {
+        super("Деление на ноль запрещено!");
+    }
+}
+
+class myNullPointerExeption extends NullPointerException {
+    public myNullPointerExeption(int i) {
+        super("Элемент " + i + " отсутствует!");
+    }
+}
+
+class myFileNotFoundExeption extends FileNotFoundException {
+    public myFileNotFoundExeption(String path) {
+        super("Данный файл по адресу " + path + " не найден!");
     }
 }
 
