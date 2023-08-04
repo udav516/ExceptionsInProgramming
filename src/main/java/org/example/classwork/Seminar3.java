@@ -10,6 +10,14 @@ public class Seminar3 {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        try (Counter counter = new Counter()) {
+            counter.add();
+            System.out.println(counter.getA());
+            counter.close();
+            counter.add();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void doSomething() throws Exception {
@@ -29,5 +37,34 @@ public class Seminar3 {
         }
     }
 
+}
+
+class Counter implements AutoCloseable {
+    private int a;
+
+    public Counter() {
+        this.a = 0;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public void add() throws IOException {
+        if (isClosed()) {
+            throw new IOException("Объект закрыт");
+        }
+        this.a++;
+    }
+
+    public boolean isClosed() {
+        return a < 0;
+    }
+
+    @Override
+    public void close() {
+        this.a = -1;
+        System.out.println("Method close is closed");
+    }
 }
 
