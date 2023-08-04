@@ -41,8 +41,8 @@ public class Seminar3 {
             }
         } catch (NullPointerException e) {
             try {
-                throw new myNullPointerExeption(i);
-            } catch (myNullPointerExeption ex) {
+                throw new myNullPointerException(i);
+            } catch (myNullPointerException ex) {
                 System.out.println(ex.getMessage());
             }
         }
@@ -115,8 +115,8 @@ class DivisionByZeroException extends ArithmeticException {
     }
 }
 
-class myNullPointerExeption extends NullPointerException {
-    public myNullPointerExeption(int i) {
+class myNullPointerException extends NullPointerException {
+    public myNullPointerException(int i) {
         super("Элемент " + i + " отсутствует!");
     }
 }
