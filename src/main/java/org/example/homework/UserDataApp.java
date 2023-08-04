@@ -1,5 +1,7 @@
 package org.example.homework;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class UserDataApp {
@@ -47,7 +49,10 @@ public class UserDataApp {
      * @param phoneNumber номер телефона
      * @param gender      пол
      */
-    private static void saveUserDataToFile(String lastName, String firstName, String middleName, String dateOfBirth, String phoneNumber, String gender) {
-
+    private static void saveUserDataToFile(String lastName, String firstName, String middleName, String dateOfBirth, String phoneNumber, String gender) throws IOException {
+        String fileName = "dataUser";
+        try (FileWriter fileWriter = new FileWriter(fileName, true)){
+            fileWriter.write(lastName + " " + firstName + " " + middleName + " " + dateOfBirth + " " + phoneNumber + " " + gender + "\n");
+        }
     }
 }
